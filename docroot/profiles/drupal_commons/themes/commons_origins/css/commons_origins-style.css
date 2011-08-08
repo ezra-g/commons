@@ -3304,3 +3304,39 @@ a.feed-icon img {
     padding: 1px 5px 2px;
     text-transform: uppercase;
 }
+
+/* Search Dropdown Styles */
+  #commons-search-options {
+    position: absolute;
+    z-index: 9999;
+    margin: 5px 0 0 -12px;
+    background: #3a3a3a url(../images/search-submit.png) repeat-x 0 0;
+    border: 1px solid #3a3a3a;
+    color: #ddd;
+    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 11px;
+  }
+
+  #commons-search-options li {
+    list-style: none;
+    margin: 0 4px;
+    padding: 0;
+    border-top: 1px solid #3a3a3a;
+  }
+
+  #commons-search-options li.commons-search-site {
+    border-top: none;
+    background: url(/misc/arrow-asc.png) right center no-repeat;
+  }
+
+  #commons-search-options.search-options-open li.commons-search-site {
+    border-top: none;
+    background: url(/misc/arrow-desc.png) right center no-repeat;
+  }
+
+  #commons-search-options a {
+    color: #ddd;
+    display: block;
+    padding: 5px;
+  }
+
