@@ -2014,7 +2014,7 @@ input.list-add-to-cart:focus {
 	font-weight: normal;
 	margin: 6px 0px;
 }
-.sidebar-last { margin-top:5px;}
+.sidebar-last { margin-top:15px;}
 .sidebar-last .sidebar-last-inner .block { margin-left:25px; width:250px;}
 
 .sidebar-last .block h2.block-title,
@@ -3859,3 +3859,40 @@ textarea, .form-item input, .form-item select, #content-region input.form-text {
     top: 1.2em;
 
 }
+
+/* Search Dropdown Styles */
+  #commons-search-options {
+    position: absolute;
+    z-index: 9999;
+    margin: -8px 0 0 -7px;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+    -moz-border-radius: 0px 0px 6px 6px;
+    -webkit-border-radius: 0px 0px 6px 6px;
+    border-radius: 0px 0px 6px 6px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+
+  #commons-search-options li {
+    list-style: none;
+    margin: 0 4px;
+    padding: 0;
+    border-top: 1px solid #d8d8d8;
+  }
+
+  #commons-search-options li.commons-search-site {
+    border-top: none;
+    background: url(/misc/arrow-asc.png) right center no-repeat;
+  }
+
+  #commons-search-options.search-options-open li.commons-search-site {
+    border-top: none;
+    background: url(/misc/arrow-desc.png) right center no-repeat;
+  }
+
+  #commons-search-options a {
+    display: block;
+    padding: 5px;
+  }
