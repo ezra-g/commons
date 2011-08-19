@@ -158,7 +158,7 @@ function notifications_content_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Add disable (skip notifications) field set
  */
-function _notifications_content_add_disable_field(&$form, $default = 0) {
+function _notifications_content_add_disable_field(&$form, $default = 1) {
   if (user_access('skip notifications')) {
     // Add fieldset without affecting any other elements there
     $form['notifications']['#type'] = 'fieldset';
