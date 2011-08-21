@@ -25,6 +25,49 @@ function activity_log_views_query_alter(&$view, &$query) {
 }
 
 /**
+ * Implementation of hook_views_pre_render().
+ * 
+ * Enforce node access restrictions on status updates that mention nodes.
+ */
+function activity_log_views_pre_render(&$view) {
+  $nids = array();
+  // Our goal is to remove status updates from $view->result if the viewing
+  // user doesn't have permission to view the node.
+  // Since running node_access() requires a node_load() on each node,
+  // we use db_rewrite_sql() instead, by way of a simple SELECT query.
+  if ($view->base_table == 'activity_log_messages' && !empty($view->result)) {
+    foreach($view->result as $key => $result) {
+      if ($result->activity_log_messages_target_type == 'node') {
+        $nids[$key] = $result->activity_log_messages_target_id;
+      }
+      else {
+        $non_nid_keys[$key] = $result->activity_log_messages_target_id;
+      }
+    }
+    // An array keyed on the Views result ID with the NID as the value.
+    $node_status_sql = '';
+    global $user;
+    $account = $user;
+    $nids_visible = array();
+    if (!user_access('administer nodes', $account)) {
+      $node_status_sql = ' AND (n.status = 1 || n.uid = %d)';
+    }
+    $placeholders = db_placeholders($nids);
+    // Generate a list of nids mentioned in the view which the user has
+    // permission to view.
+    $query_restricted = db_query(db_rewrite_sql("SELECT DISTINCT(n.nid) FROM {node} n WHERE nid IN ($placeholders)"), array_values($nids));
+    while ($result_restricted = db_fetch_object($query_restricted)) {
+      $nids_visible[$result_restricted->nid] = $result_restricted->nid;
+    }
+    // Identify which nids where removed from $nids;
+    $nids_to_remove = array_diff($nids, $nids_visible);
+    // Remove the items from $view->result corresponding to those nids.
+    // $nids is still keyed on the result ID.
+    $view->result = array_diff_key($view->result, $nids_to_remove);
+  }
+}
+
+/**
  * Implementation of hook_views_handlers().
  */
 function activity_log_views_handlers() {
