@@ -10,7 +10,7 @@ function commons_status_streams_menu() {
   $items['stream'] = array(
     'title' => 'Activity stream',
     'page callback' => 'theme',
-    'page arguments' => array('facebook_status_form_display', NULL, NULL, 'activity_log_stream'),
+    'page arguments' => array('facebook_status_form_display', 'global', NULL, 'activity_log_stream'),
     'access arguments' => array('view all activity messages'),
     'description' => 'An activity dashboard page.',
   );
