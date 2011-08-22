@@ -307,13 +307,17 @@ function commons_core_group_create_content_block_form(&$form_state) {
   else if (arg(0) == 'content' && arg(1)) {
     $arg = arg(1);
   }
-  
+  $node = menu_get_object('node');
+  if (og_is_group_type($node->type)) {
+    $arg = 'group';
+  }
   if ($arg) {
     switch ($arg) {
       // Known content-type paths within Commons
       case 'polls':
         $form['node_type']['#default_value'] = 'poll';
         break;
+      case 'group':
       case 'discussions':
         $form['node_type']['#default_value'] = 'discussion';
         break;
@@ -363,7 +367,6 @@ function commons_core_group_create_content_block_form(&$form_state) {
     '#type' => 'submit',
     '#value' => t('Create'),
   );
-  
   return $form;
 }
 
