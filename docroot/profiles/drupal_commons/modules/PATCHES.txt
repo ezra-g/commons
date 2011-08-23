@@ -6,6 +6,8 @@ ACTIVITY LOG EMAIL DISGESTS
 Issue: http://drupal.org/node/1242858
 Fix: http://drupal.org/node/1242858#comment-4838550
 
+Issue: http://drupal.org/node/1256722
+Fix: https://github.com/acquia/commons/pull/19
 
 CHART
 ---------------
