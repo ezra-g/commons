@@ -3784,7 +3784,7 @@ function digests_rules_defaults_ur_request() {
             array (
               'en' => 
               array (
-                'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] [relationship:relationship-name]ed [requestee:user]</div></div>',
+                'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] is now following [requestee:user] [requestee:user]</div></div>',
               ),
             ),
             'grouping' => 
@@ -3798,7 +3798,7 @@ function digests_rules_defaults_ur_request() {
               array (
                 'en' => 
                 array (
-                  'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] [relationship:relationship-name]ed [collection]</div></div>',
+                  'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] is now following [requestee:user] [collection]</div></div>',
                 ),
               ),
             ),
@@ -3953,7 +3953,7 @@ function digests_rules_defaults_ur_request() {
             array (
               'en' => 
               array (
-                'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] [relationship:relationship-name]ed [requestee:user]</div></div>',
+                'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] is now following [requestee:user] [requestee:user]</div></div>',
               ),
             ),
             'grouping' => 
@@ -3967,7 +3967,7 @@ function digests_rules_defaults_ur_request() {
               array (
                 'en' => 
                 array (
-                  'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] [relationship:relationship-name]ed [collection]</div></div>',
+                  'template' => '<div class="activity-log-picture">[requester:picture]</div><div class="activity-log-indent"><div class="activity-log-content">[requester:user] is now following [requestee:user] [collection]</div></div>',
                 ),
               ),
             ),

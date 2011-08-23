@@ -82,12 +82,22 @@ function commons_core_block($op = 'list', $delta = 0, $edit = array()) {
   return _commons_core_block($op, $delta, $edit);
 }
 
+
 /**
  * Implementation of hook_form_alter()
  */
 function commons_core_form_alter(&$form, &$form_state, $form_id) {
+  // Change the language on the confirmation form for new follower relationships.
+  // TODO: Evaluate other solutions (such as Flag) for the follower
+  // functionality. Since follower relationships are no longer reciprocal, we
+  // can likely find a solution that is closer to our desired IA and has better
+  // exportable support.
+  if ($form_id == 'user_relationships_ui_request' && $form['rtid']['#default_value'] == 1){
+    $user_being_followed = user_load($form['requestee']['#value']);
+    $form['description']['#value'] = t('Are you sure you want to follow %user?', array('%user' => $user_being_followed->name));
+    $form['actions']['submit']['#value'] = t('Follow');
+  }
   module_load_include('inc', 'commons_core', 'commons_core.form');
-
   // A node is being added or edited
   if ($form['#id'] == 'node-form') {
     commons_core_node_form_alter($form, $form_state);
