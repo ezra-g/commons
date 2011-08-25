@@ -191,7 +191,28 @@ function drupal_commons_build_directories() {
  * Add and configure vocabularies
  */
 function drupal_commons_config_taxonomy() {  
-  // Add free-tagging vocabulary for content
+  // Add free-tagging vocabulary for content.
+  // Several Commons views are hard-coded to use VID 2/DRUPAL_COMMONS_TAG_ID
+  // for the tags vocabulary. Setting the value of an auto_increment column
+  // ({vocabulary}.vid) doesn't always update the auto_increment value.
+  // To workaround this problem, we create a placeholder vocabulary and then
+  // delete it.
+  // TODO: Consider providing Views integration for vocabulary owner.
+  // Related issues: http://drupal.org/node/1071198
+  // http://drupal.org/node/789674 .
+  $increment_vocab = array(
+    'name' => st('Tags'),
+    'description' => st('Free-tagging vocabulary for all content items'),
+    'multiple' => '0',
+    'required' => '0',
+    'hierarchy' => '0',
+    'relations' => '1',
+    'tags' => '1',
+    'module' => 'taxonomy',
+    'help' => st('Press enter or click !plus between tags.', array('!plus' => '\'+\'')),
+  );
+  taxonomy_save_vocabulary($increment_vocab);
+  taxonomy_del_vocabulary($increment_vocab['vid']); 
   $vocab = array(
     'name' => st('Tags'),
     'description' => st('Free-tagging vocabulary for all content items'),
@@ -205,12 +226,6 @@ function drupal_commons_config_taxonomy() {
   );
   taxonomy_save_vocabulary($vocab); 
   
-  // Force free-tagging vocabulary to a certain ID
-  // This is needed for bundled views to work
-  db_query("UPDATE {vocabulary} SET vid = %d WHERE name = '%s'",
-    DRUPAL_COMMONS_TAG_ID,
-    st('Tags')
-  );
 }
 
 /**
