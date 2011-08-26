@@ -204,13 +204,7 @@ function drupal_commons_config_taxonomy() {
     'help' => st('Press enter or click !plus between tags.', array('!plus' => '\'+\'')),
   );
   taxonomy_save_vocabulary($vocab); 
-  
-  // Force free-tagging vocabulary to a certain ID
-  // This is needed for bundled views to work
-  db_query("UPDATE {vocabulary} SET vid = %d WHERE name = '%s'",
-    DRUPAL_COMMONS_TAG_ID,
-    st('Tags')
-  );
+  variable_set('commons_tags_vid', $vocab['vid']);
 }
 
 /**
