@@ -1908,7 +1908,7 @@ function commons_core_views_default_views() {
       ),
       'type' => 'textfield',
       'limit' => TRUE,
-      'vid' => '2',
+      'vid' => variable_get('commons_tags_vid', 1),
       'id' => 'tid',
       'table' => 'term_node',
       'field' => 'tid',
@@ -2894,7 +2894,7 @@ function commons_core_views_default_views() {
       ),
       'type' => 'textfield',
       'limit' => TRUE,
-      'vid' => '2',
+      'vid' => variable_get('commons_tags_vid', 1),
       'id' => 'tid',
       'table' => 'term_node',
       'field' => 'tid',
@@ -6088,7 +6088,7 @@ function commons_core_views_default_views() {
     'vid' => array(
       'operator' => 'in',
       'value' => array(
-        '2' => '2',
+         variable_get('commons_tags_vid', 1) => variable_get('commons_tags_vid', 1),
       ),
       'group' => '0',
       'exposed' => FALSE,

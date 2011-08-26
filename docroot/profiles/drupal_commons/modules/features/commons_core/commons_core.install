@@ -16,10 +16,11 @@ function commons_core_install() {
  */
 function commons_core_add_taxonomy() {
   require_once('profiles/drupal_commons/drupal_commons.profile');
+  $tags_vid = variable_get('commons_tags_vid', 1);
   // Link free-tagging vocabulary to node types
   foreach (array('group', 'notice', 'page') as $type) {
     $record = new stdClass;
-    $record->vid = DRUPAL_COMMONS_TAG_ID;
+    $record->vid = $tags_vid;
     $record->type = $type;
     drupal_write_record('vocabulary_node_types', $record);
   }
@@ -357,5 +358,17 @@ function commons_core_update_6010() {
  */
 function commons_core_update_6011() {
   features_install_modules(array('commons_subgroups'));
+  return array();
+}
+
+/**
+ * We've replaced the DRUPAL_COMMONS_TAG_ID constant with a variable
+ * per http://drupal.org/node/1071198.
+ */
+function commons_core_update_6012() {
+  $vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE module = 'commons_core'"));
+  if (!empty($vid)) {
+    variable_set('commons_tags_vid', $vid);
+  }
   return array();
 }

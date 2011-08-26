@@ -31,12 +31,12 @@ function commons_poll_add_flag() {
  */
 function commons_poll_add_taxonomy() {
   require_once('profiles/drupal_commons/drupal_commons.profile');
-  
+  $tags_vid = variable_get('commons_tags_vid', 1);
   $check_sql = "SELECT vid FROM {vocabulary_node_types} WHERE vid = %d and type = '%s'";
   
-  if (!db_result(db_query($check_sql, DRUPAL_COMMONS_TAG_ID, 'poll'))) {
+  if (!db_result(db_query($check_sql, $tags_vid, 'poll'))) {
     $taxonomy = new stdClass;
-    $taxonomy->vid = DRUPAL_COMMONS_TAG_ID;
+    $taxonomy->vid = $tags_vid;
     $taxonomy->type = 'poll';
     drupal_write_record('vocabulary_node_types', $taxonomy);
   }

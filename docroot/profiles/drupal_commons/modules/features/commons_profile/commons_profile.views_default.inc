@@ -2148,7 +2148,7 @@ function commons_profile_views_default_views() {
       ),
       'type' => 'textfield',
       'limit' => TRUE,
-      'vid' => '2',
+      'vid' => variable_get('commons_tags_vid', 1),
       'id' => 'tid',
       'table' => 'term_user',
       'field' => 'tid',
